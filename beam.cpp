@@ -82,6 +82,11 @@ void CBeam::ElementStiffness(double* Matrix)
 	CBeamMaterial* material_ = dynamic_cast<CBeamMaterial*>(ElementMaterial_);	// Pointer to material of the element
 
 	double k = material_->E * material_->Area / L / L2;
+	double Iy =  material_->b * material_->b * material_->b * material_->h/12;
+	double Iz =  material_->b * material_->h * material_->h * material_->h/12;
+	double G = material_->E/2/(1+material_->v);
+	double Ip = Iy + Iz;
+	double Matrix[78] {};       
 
 	Matrix[0] = k*DX2[0];
 	Matrix[1] = k*DX2[1];
